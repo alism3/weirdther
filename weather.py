@@ -3,7 +3,6 @@ from datetime import datetime
 
 DEGREE_SYMBOL = u"\N{DEGREE SIGN}C"
 
-
 def format_temperature(temp):
     """Takes a temperature and returns it in string format with the degrees
         and Celcius symbols.
@@ -24,7 +23,8 @@ def convert_date(iso_string):
     Returns:
         A date formatted like: Weekday Date Month Year e.g. Tuesday 06 July 2021
     """
-    pass
+    return datetime.fromisoformat(iso_string).strftime("%A %d %B %Y")
+
 
 
 def convert_f_to_c(temp_in_fahrenheit):
@@ -35,18 +35,26 @@ def convert_f_to_c(temp_in_fahrenheit):
     Returns:
         A float representing a temperature in degrees Celcius, rounded to 1 decimal place.
     """
-    pass
+    float_fahrenheit = float(temp_in_fahrenheit)
+    celsius = ((float_fahrenheit -32) / 1.8)
+    return round(celsius, 1)
 
 
 def calculate_mean(weather_data):
     """Calculates the mean value from a list of numbers.
-
     Args:
         weather_data: a list of numbers.
     Returns:
         A float representing the mean value.
     """
-    pass
+    conv_list = []
+    print(conv_list)  # To see the list before conversion
+    for item in weather_data:
+        print(item) #To see the items in the list
+        converted_number = float(item)
+        print(converted_number) # To see the converted number
+        conv_list.append(converted_number)
+    return sum(conv_list) / len(conv_list)
 
 
 def load_data_from_csv(csv_file):
