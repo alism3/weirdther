@@ -110,4 +110,3 @@ def generate_daily_summary(weather_data):
         A string containing the summary information.
     """
     pass
-git rev-parse --show-toplevel
