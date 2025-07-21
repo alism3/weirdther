@@ -65,8 +65,14 @@ def load_data_from_csv(csv_file):
     Returns:
         A list of lists, where each sublist is a (non-empty) line in the csv file.
     """
-    pass
+    #data = [] # Create an empty list, I will fill it with the data that I need
+    # open(csv_file, 'r') as file:
+        # = csv.reader(file) #Tell Python to use the CSV reader to understand the file
+        #data.append(csv_reader)
+        #for row in csv_reader:
 
+    #CHECK ERROR
+ 
 
 def find_min(weather_data):
     """Calculates the minimum value in a list of numbers.
@@ -87,8 +93,21 @@ def find_max(weather_data):
     Returns:
         The maximum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
-    pass
-
+    weather_data = [float(item) for item in weather_data]
+    max_value = 0
+    spot_max = None
+    print(max_value)  # To see the list before conversion
+    if weather_data == []:
+        return ()
+    else:
+        for spot, value in enumerate(weather_data):
+            print(spot) # To see the spot in the list
+            if value > max_value:
+                max_value = value
+                spot_max = spot
+            elif value == max_value:
+                spot_max = spot
+        return (max_value, spot_max)
 
 def generate_summary(weather_data):
     """Outputs a summary for the given weather data.
