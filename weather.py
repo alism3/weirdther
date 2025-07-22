@@ -82,7 +82,18 @@ def find_min(weather_data):
     Returns:
         The minimum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
-    pass
+    weather_data_float = [float(item) for item in weather_data]
+    if weather_data_float == []:
+        return ()
+    min_value = float('inf')  # Start with the highest possible float value
+    spot_min = None
+    for spot, value in enumerate(weather_data_float):
+        if value < min_value:
+            min_value = value
+            spot_min = spot
+        elif value == min_value:
+            spot_min = spot
+    return (min_value, spot_min)
 
 
 def find_max(weather_data):
