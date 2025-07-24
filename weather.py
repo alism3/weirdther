@@ -65,13 +65,19 @@ def load_data_from_csv(csv_file):
     Returns:
         A list of lists, where each sublist is a (non-empty) line in the csv file.
     """
-    #data = [] # Create an empty list, I will fill it with the data that I need
-    # open(csv_file, 'r') as file:
-        # = csv.reader(file) #Tell Python to use the CSV reader to understand the file
-        #data.append(csv_reader)
-        #for row in csv_reader:
+    data = [] # Create an empty list, I will fill it with the data that I need
+    with open(csv_file, 'r', newline='') as file:
+        csv_reader = csv.reader(file) #Tell Python to use the CSV reader to understand the file
+        next(csv_reader) # Skip header rows 
+        for row in csv_reader: ## loop through rows
 
-    #CHECK ERROR
+            ## if has items (row truthy)
+            if row:
+                ## convert values row[0] 
+                ## add to list 
+                data.append([str(row[0]), int(row[1]), int(row[2])]) ## ** convert to int
+    print(data)
+    return data
  
 
 def find_min(weather_data):
@@ -98,7 +104,6 @@ def find_min(weather_data):
 
 def find_max(weather_data):
     """Calculates the maximum value in a list of numbers.
-
     Args:
         weather_data: A list of numbers.
     Returns:
@@ -128,7 +133,19 @@ def generate_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    pass
+    days = len(weather_data)
+    print(days) #Check the number of the days
+    low_temp = []
+    high_temp = []
+    for day, value in enumerate(weather_data):
+        find_min = value
+        low_temp.append(find_min)
+        
+            
+
+        
+
+
 
 
 def generate_daily_summary(weather_data):
@@ -139,4 +156,8 @@ def generate_daily_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
+
+    ##f"  Minimum Temperature: {}"
+
+    ## '\n' is a new line (you mayneed a lot of these )
     pass
