@@ -54,7 +54,7 @@ def calculate_mean(weather_data):
         converted_number = float(item)
         print(converted_number) # To see the converted number
         conv_list.append(converted_number)
-    return sum(conv_list) / len(conv_list)
+    return round(sum(conv_list) / len(conv_list), 1)
 
 
 def load_data_from_csv(csv_file):
@@ -133,19 +133,46 @@ def generate_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    days = len(weather_data)
-    print(days) #Check the number of the days
-    low_temp = []
-    high_temp = []
-    for day, value in enumerate(weather_data):
-        find_min = value
-        low_temp.append(find_min)
-        
-            
+    num_days = len(weather_data)
+    print(num_days) #Check the number of the days
+    
+    
+    # Now I am trying to get the day with the lowest temperature
+    low_temp_all = []
+    for index, value in enumerate(weather_data):
+        low_temp = convert_f_to_c(value[1])
+        print(low_temp) #Checking
+        low_temp_all.append(low_temp) 
+    min_value_all = find_min(low_temp_all)
+    min_overall_temp, min_index = min_value_all #unpacking
+    days_min_all = weather_data[min_index]
+    day_min = days_min_all[0]
+    date_fix = convert_date(day_min)
+    
+    # Now I am trying to get the day with the Highest temperature
+    high_temp_all = []
+    for index, value in enumerate(weather_data):
+        high_temp = convert_f_to_c(value[2])
+        print(high_temp) #Checking
+        high_temp_all.append(high_temp)
+    max_res_all = find_max(high_temp_all)
+    max_overall_temp, max_index = max_res_all #unpacking
+    days_max_all = weather_data[max_index]
+    day_max = days_max_all[0]
+    fix_date = convert_date(day_max)
+    
+# Now I am trying to get the average low temperature of the week
+    average_low = calculate_mean(low_temp_all)
 
-        
-
-
+# Now I am trying to get the average high temperature of the week
+    average_high = calculate_mean(high_temp_all)
+    return (
+    f"{num_days} Day Overview\n  "
+    f"The lowest temperature will be {format_temperature(min_overall_temp)}, and will occur on {date_fix}.\n  "  
+    f"The highest temperature will be {format_temperature(max_overall_temp)}, and will occur on {fix_date}.\n  "  
+    f"The average low this week is {format_temperature(average_low)}.\n  "
+    f"The average high this week is {format_temperature(average_high)}.\n"
+)
 
 
 def generate_daily_summary(weather_data):
