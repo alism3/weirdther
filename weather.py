@@ -161,10 +161,8 @@ def generate_summary(weather_data):
     day_max = days_max_all[0]
     fix_date = convert_date(day_max)
     
-# Now I am trying to get the average low temperature of the week
+  # Now I am trying to get the average high temperature of the week
     average_low = calculate_mean(low_temp_all)
-
-# Now I am trying to get the average high temperature of the week
     average_high = calculate_mean(high_temp_all)
     return (
     f"{num_days} Day Overview\n  "
@@ -184,7 +182,15 @@ def generate_daily_summary(weather_data):
         A string containing the summary information.
     """
 
-    ##f"  Minimum Temperature: {}"
+    ##f"  Minimum Temperature: {}""
 
     ## '\n' is a new line (you mayneed a lot of these )
-    pass
+    daily_report_summary = "" #Empty string
+    for value in weather_data:
+        daily_summary = (
+            f"---- {convert_date(value[0])} ----\n"
+            f"  Minimum Temperature: {format_temperature(convert_f_to_c(value[1]))}\n"
+            f"  Maximum Temperature: {format_temperature(convert_f_to_c(value[2]))}\n\n"
+        )
+        daily_report_summary += daily_summary # Adding this day's summary to the overall report
+    return daily_report_summary
